@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: helloapi-cntr
-          image: "vishal4590/helloapi:v1"
+          image: "phoenix1984/helloapp:v1"
           imagePullPolicy: Always
           ports:
             - name: http
