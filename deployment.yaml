@@ -1,0 +1,68 @@
+---
+# Source: nodeapi-chart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloapi
+  namespace: test
+  labels:
+    name: helloapi
+    version: "1.0"
+    managed-by: vishal
+spec:   
+  replicas: 1
+  selector:
+    matchLabels:
+      name: helloapi
+      zone: dev
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: helloapi
+        name: helloapi
+        version: v2
+        release: stable
+        tier: fe
+        zone: dev
+    spec:
+      containers:
+        - name: helloapi-cntr
+          image: "vishal4590/helloapi:v1"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: dev
+            - name: PORT
+              value: "5000"
+          resources:
+            limits:
+              cpu: 1000m
+              memory: 256Mi
+            requests:
+              cpu: 500m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloapi
+  namespace: test
+  labels:
+    app: helloapi
+spec:
+  selector:
+    app: helloapi
+  ports:
+  - port: 5000
+    name: http
+    targetPort: 5000
