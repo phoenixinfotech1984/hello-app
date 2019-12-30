@@ -3,7 +3,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloapi
+  name: helloapi-canary
   namespace: test
   labels:
     name: helloapi
@@ -26,14 +26,14 @@ spec:
       labels:
         app: helloapi
         name: helloapi
-        version: v1
+        version: v2
         release: stable
         tier: fe
         zone: dev
     spec:
       containers:
         - name: helloapi-cntr
-          image: "phoenix1984/helloapp:v1"
+          image: "phoenix1984/helloapp:v2"
           imagePullPolicy: Always
           ports:
             - name: http
@@ -51,18 +51,3 @@ spec:
             requests:
               cpu: 500m
               memory: 128Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: helloapi
-  namespace: test
-  labels:
-    app: helloapi
-spec:
-  selector:
-    app: helloapi
-  ports:
-    - port: 5000
-      name: http
-      targetPort: 5000

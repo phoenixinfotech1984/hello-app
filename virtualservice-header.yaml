@@ -12,16 +12,21 @@ spec:
     - match:
         - uri:
             prefix: /hello
+          headers:
+            end-user:
+              exact: "phoenix-user"
       route:
         - destination:
             host: helloapi
             port:
               number: 5000
             subset: canary
-          weight: 0
+    - match:
+        - uri:
+            prefix: /hello
+      route:
         - destination:
             host: helloapi
             port:
               number: 5000
             subset: stable
-          weight: 100
