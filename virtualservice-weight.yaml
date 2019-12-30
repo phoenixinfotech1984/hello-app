@@ -18,10 +18,10 @@ spec:
             port:
               number: 5000
             subset: canary
-          weight: 0
+          weight: 90
         - destination:
             host: helloapi
             port:
               number: 5000
             subset: stable
-          weight: 100
+          weight: 10
