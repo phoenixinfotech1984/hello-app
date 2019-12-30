@@ -15,3 +15,14 @@ kubectl apply -f gateway.yaml
 kubectl apply -f virtualservice.yaml
 ```
 
+**Access Node JS Hello App Via Ingressgateway External IP**
+
+```
+http://externaip/hello/200
+```
+
+**Different Deployment strategy(Canary Release)**
+
+- Blue-Green Deployment
+- A/B Testing
+- Traffic Splitting 
