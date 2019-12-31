@@ -34,7 +34,7 @@ kubectl apply -f destination.yaml
 
 **Blue-Green(change subset to canary in virtualservice.yaml)**
 ```
-kubectl apply -f virtualservice.yaml
+kubectl apply -f virtualservice-bluegreen.yaml
 ```
 
 **A/B Testing**
