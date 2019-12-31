@@ -17,4 +17,4 @@ spec:
             host: helloapi
             port:
               number: 5000
-            subset: stable
+            subset: canary
