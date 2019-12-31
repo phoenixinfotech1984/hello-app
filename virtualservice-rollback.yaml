@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: helloapi
+  namespace: test
+spec:
+  gateways:
+    - test-gateway
+  hosts:
+    - "helloapp.phoenix.com"
+  http:
+    - match:
+        - uri:
+            prefix: /hello
+      route:
+        - destination:
+            host: helloapi
+            port:
+              number: 5000
+            subset: stable
