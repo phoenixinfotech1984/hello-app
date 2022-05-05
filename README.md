@@ -1,7 +1,7 @@
 # hello-app
 Node JS Hello App Deploy in K8s Cluster and access through ISTIO
 
-**DockerHub login, Build Image, Push Image
+**DockerHub login, Build Image, Push Image**
 ```
 docker login
 docker build -t {dockerhubid}/helloapp:v1 .
