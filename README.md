@@ -1,6 +1,15 @@
 # hello-app
 Node JS Hello App Deploy in K8s Cluster and access through ISTIO
 
+**DockerHub login, Build Image, Push Image
+```
+docker login
+docker build -t {dockerhubid}/helloapp:v1 .
+docker push {dockerhubid}/helloapp:v1
+```
+
+# Part-1
+
 **Deploye Stable Version**
 ```
 kubectl apply -f deployment.yaml
@@ -16,6 +25,8 @@ kubectl apply -f virtualservice.yaml
 ```
 http://externaip/hello/200
 ```
+
+# Part-2
 
 **Different Deployment strategy(Canary Release)**
 - Blue-Green Deployment
