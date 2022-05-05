@@ -28,6 +28,24 @@ http://externaip/hello/200
 
 # Part-2
 
+**Change Code**
+
+```
+res.write('<h1>Hello World! => Version Stable</h1>');
+```
+
+To
+
+```
+res.write('<h1>Hello World! => Version Canary</h1>');
+```
+
+**Build new image of your change v2**
+```
+docker build -t {dockerhubid}/helloapp:v2 .
+docker push {dockerhubid}/helloapp:v2
+```
+
 **Different Deployment strategy(Canary Release)**
 - Blue-Green Deployment
 - A/B Testing
