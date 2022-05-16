@@ -14,7 +14,7 @@ spec:
     port: 5000
     targetPort: 5000
     gateways:
-      - hello-gateway.test.svc.cluster.local
+      - test-gateway.test.svc.cluster.local
     hosts:
       - helloapp.phoenix.com
     trafficPolicy:
