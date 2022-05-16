@@ -1,4 +1,4 @@
-apiVersion: flagger.app/v1alpha3
+apiVersion: flagger.app/v1beta1
 kind: Canary
 metadata:
   name: helloapi
@@ -12,29 +12,36 @@ spec:
   progressDeadlineSeconds: 60
   service:
     port: 5000
+    targetPort: 5000
     gateways:
-      - test-gateway.test.svc.cluster.local
+      - hello-gateway.test.svc.cluster.local
     hosts:
-      - hello.example.com
+      - helloapp.phoenix.com
     trafficPolicy:
       tls:
         # use ISTIO_MUTUAL when mTLS is enabled
         mode: DISABLE
-  canaryAnalysis:
+  analysis:
     interval: 30s
     threshold: 10
     maxWeight: 50
     stepWeight: 5
     metrics:
-      - name: request-success-rate
-        threshold: 99
-        interval: 30s
-      - name: request-duration
-        threshold: 500
+      - name: istio_requests_total
+        # minimum req success rate (non 5xx responses)
+        # percentage (0-100)
+        thresholdRange:
+          min: 99
+        interval: 1m
+      - name: istio_request_duration_seconds_bucket
+        # maximum req duration P99
+        # milliseconds
+        thresholdRange:
+          max: 500
         interval: 30s
     webhooks:
       - name: load-test
         url: http://flagger-loadtester.test/
         timeout: 5s
         metadata:
-          cmd: "hey -z 1m -q 10 -c 2 http://helloapi.example.com/hello"
+          cmd: "hey -z 1m -q 10 -c 2 http://helloapi:5000/hello/200"
