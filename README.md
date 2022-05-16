@@ -12,13 +12,13 @@ docker push {dockerhubid}/helloapp:v1
 
 **Deploye Stable Version**
 ```
-kubectl apply -f deployment.yaml
+kubectl apply -f part-1/deployment.yaml
 ```
 
 **To Access App Create Gateway and Virtualserivce**
 ```
-kubectl apply -f gateway.yaml
-kubectl apply -f virtualservice.yaml
+kubectl apply -f part-1/gateway.yaml
+kubectl apply -f part-1/virtualservice.yaml
 ```
 
 **Access App Via Ingressgateway External IP**
@@ -53,27 +53,34 @@ docker push {dockerhubid}/helloapp:v2
 
 **Deploy Canary Version**
 ```
-kubectl apply -f deployment-canary.yaml
+kubectl apply -f part-2/deployment-canary.yaml
 ```
 
 **Create Destination Rule**
 ```
-kubectl apply -f destination.yaml
+kubectl apply -f part-2/destination.yaml
 ```
 
 **Blue-Green(change subset to canary in virtualservice.yaml)**
 ```
-kubectl apply -f virtualservice-bluegreen.yaml
+kubectl apply -f part-2/virtualservice-bluegreen.yaml
 ```
 
 **A/B Testing**
 ```
-kubectl apply -f virtualservice-header.yaml
-kubectl apply -f virtualservice-browser.yaml
+kubectl apply -f part-2/virtualservice-header.yaml
+kubectl apply -f part-2/virtualservice-browser.yaml
 ```
 
 **Traffic Splitting**
 ```
-kubectl apply -f virtualservice-weight.yaml
+kubectl apply -f part-2/virtualservice-weight.yaml
+```
+
+# Part-3
+
+**Flagger Cannary**
+```
+kubectl apply -f part-3/canary.yaml
 ```
 
