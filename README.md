@@ -1,6 +1,9 @@
 # hello-app
 Node JS Hello App Deploy in K8s Cluster and access through ISTIO
 
+**Architecture Diagram**
+![Alt text](./canary-release-architecture.png?raw=true)
+
 **DockerHub login, Build Image, Push Image**
 ```
 docker login
@@ -10,7 +13,7 @@ docker push {dockerhubid}/helloapp:v1
 
 # Part-1
 
-**Deploye Stable Version**
+**Deploy Stable Version**
 ```
 kubectl apply -f part-1/deployment.yaml
 ```
@@ -79,8 +82,11 @@ kubectl apply -f part-2/virtualservice-weight.yaml
 
 # Part-3
 
-**Flagger Cannary**
+**Process Diagram**
+![Alt text](./flagger-canary-process.png?raw=true)
+
+**Flagger Canary with metrics**
 ```
 kubectl apply -f part-3/canary.yaml
+kubectl apply -f part-3/canary-metrics.yaml
 ```
-
