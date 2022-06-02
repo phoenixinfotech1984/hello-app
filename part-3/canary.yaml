@@ -27,6 +27,13 @@ spec:
     maxWeight: 50
     stepWeight: 5
     metrics:
+      - name: "500s percentage"
+        templateRef:
+          name: 500-error-percentage
+          namespace: istio-system
+        thresholdRange:
+          max: 5
+        interval: 1m
       - name: istio_requests_total
         # minimum req success rate (non 5xx responses)
         # percentage (0-100)
